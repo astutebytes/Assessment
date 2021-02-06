@@ -1,0 +1,40 @@
+<div class="jumbotron">
+  <div class="container">
+    <a [routerLink]="filmsUrl">&lt;&lt; Back to Films</a>
+  </div>
+</div>
+<div class="container">
+  <p class="card-header text-center text-danger" *ngIf="!isLoading && error">
+    Invalid specie id.
+  </p>
+  <p class="card-header text-center text-info" *ngIf="isLoading">
+    Fetching detail...
+  </p>
+  <div class="card" *ngIf="!isLoading && !error && !!specie">
+    <div class="card-header">
+      <b>{{ specie.name }}</b>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let item of UIMapping">
+        <span
+          class="bg-secondary text-white p-1 mr-1 rounded text-capitalize"
+          >{{ item.label }}</span
+        >
+        <span *ngIf="!item.list">{{ specie[item.key] }}</span>
+        <div *ngIf="item.list">
+          <div *ngFor="let str of specie[item.key]">
+            <a *ngIf="!item.customURL" [href]="str" target="_blank">{{
+              str
+            }}</a>
+            <a
+              *ngIf="!!item.customURL"
+              [href]="str"
+              [target]="!!item.customURL ? '_self' : '_blank'"
+              >{{ str }}</a
+            >
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

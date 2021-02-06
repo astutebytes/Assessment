@@ -1,0 +1,63 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1>Star Wars API</h1>
+    <p class="lead">Utilization of Star Wars API</p>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 class="mb-0">Films</h1>
+    </div>
+    <div class="col-md-6">
+      <input
+        (input)="searchTable()"
+        [(ngModel)]="search"
+        name="Search"
+        type="text"
+        class="form-control"
+        placeholder="Search by title or description"
+        [disabled]="isLoading"
+      />
+    </div>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th *ngFor="let col of columns">{{ col }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let film of films; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ film.title }}</td>
+        <td>{{ film.episode_id }}</td>
+        <td>{{ film.director }}</td>
+        <td>{{ film.release_date }}</td>
+        <td>
+          <button
+            class="btn btn-sm btn-primary"
+            (click)="onRowSelect(film.url)"
+          >
+            Show details
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="error">
+        <td [colSpan]="columns.length" class="text-center text-danger">
+          Unexpected error.
+        </td>
+      </tr>
+      <tr *ngIf="isLoading">
+        <td [colSpan]="columns.length" class="text-center text-info">
+          Fetching data...
+        </td>
+      </tr>
+      <tr *ngIf="!isLoading && !error && (!films || films.length === 0)">
+        <td [colSpan]="columns.length" class="text-center">
+          No records found.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -2,6 +2,21 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.
 
+## Star Wars API SDK
+
+This Project focuses on consuming the Star Wars API.
+
+It has consumed three endpoints
+
+`films`
+To fetch all the films
+
+`films/:id`
+To fetch a specific film by its id
+
+`species/:id`
+To fetch a specific specie by its id
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
