@@ -1,5 +1,7 @@
+import { environment } from "src/environments/environment";
+
 export const URL = {
-  BASE: "https://swapi.dev/api/",
+  BASE: environment.BASE_URL,
   FILMS: "films/",
   SPECIES: "species/",
 };
@@ -9,4 +11,4 @@ export const ROUTES = {
   SPECIES: "species",
 };
 
-export const API_REGEX = "https?://swapi.dev/api/$token/(\\d+)";
+export const API_REGEX = environment.API_REGEX;
