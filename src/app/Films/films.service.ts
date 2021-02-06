@@ -7,7 +7,7 @@ import { URL } from "src/app/config/constants";
 
 @Injectable()
 export class FilmService {
-  constructor(public httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   getFilms(): Observable<FilmResponse> {
     return this.httpClient

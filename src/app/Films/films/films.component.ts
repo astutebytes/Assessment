@@ -20,9 +20,9 @@ export class FilmsComponent implements OnInit, OnDestroy {
   search: string = "";
 
   constructor(
-    public filmService: FilmService,
-    public router: Router,
-    public appService: AppService
+    private filmService: FilmService,
+    private router: Router,
+    private appService: AppService
   ) {}
 
   ngOnInit(): void {

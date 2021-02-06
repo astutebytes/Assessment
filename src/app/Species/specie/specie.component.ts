@@ -35,10 +35,9 @@ export class SpecieComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    public specieService: SpeciesService,
-    public appService: AppService,
-    public router: Router,
-    public activatedRoute: ActivatedRoute
+    private specieService: SpeciesService,
+    private appService: AppService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {

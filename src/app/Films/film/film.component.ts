@@ -34,10 +34,9 @@ export class FilmComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    public filmService: FilmService,
-    public appService: AppService,
-    public router: Router,
-    public activatedRoute: ActivatedRoute
+    private filmService: FilmService,
+    private appService: AppService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
