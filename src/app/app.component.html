@@ -1,1 +1,26 @@
+<div class="modal fade show modal-wrapper" *ngIf="errorMsg">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger">Error</h5>
+      </div>
+      <div class="modal-body">
+        <p>{{ errorMsg }}</p>
+      </div>
+      <div class="modal-footer">
+        <a href="/" class="btn btn-primary">Home</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box"
+  [fullScreen]="true"
+  ><p style="color: white">Loading...</p></ngx-spinner
+>
+
 <router-outlet></router-outlet>

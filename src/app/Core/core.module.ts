@@ -1,7 +1,16 @@
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from "@angular/core";
+import { HttpRequestInterceptor } from "./http-request-interceptor";
+import { LoadingService } from "./loading.service";
 
-// We have not removed this file for future reference and keeping the code structure.
 @NgModule({
-  providers: [],
+  providers: [
+    LoadingService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class CoreModule {}

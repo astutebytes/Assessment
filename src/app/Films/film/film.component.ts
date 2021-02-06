@@ -13,8 +13,6 @@ import { customLink } from "src/app/Shared/common/utils";
 export class FilmComponent extends BaseComponent implements OnInit {
   filmsUrl = `/${ROUTES.FILMS}`;
   film: FilmModel;
-  isLoading = true;
-  error = false;
 
   UIMapping = [
     { label: "description", key: "opening_crawl" },
@@ -42,12 +40,8 @@ export class FilmComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptions.push(
       this.activatedRoute.params.subscribe((params: Params) => {
-        this.isLoading = true;
         if (params.id && params.id !== "0") {
           this.fetchFilm(params.id);
-        } else {
-          this.isLoading = false;
-          this.error = true;
         }
       })
     );
@@ -55,24 +49,16 @@ export class FilmComponent extends BaseComponent implements OnInit {
 
   fetchFilm(filmId: string): void {
     this.subscriptions.push(
-      this.filmService.getFilm(filmId).subscribe(
-        (resp: FilmModel) => {
-          this.film = resp;
-          const customURLItems = this.UIMapping.filter((el) => el.customURL);
-          customURLItems.forEach((item) => {
-            const list: string[] = this.film[item.key];
-            this.film[item.key] = list.map((str) => {
-              return customLink(str, item.customURL);
-            });
+      this.filmService.getFilm(filmId).subscribe((resp: FilmModel) => {
+        this.film = resp;
+        const customURLItems = this.UIMapping.filter((el) => el.customURL);
+        customURLItems.forEach((item) => {
+          const list: string[] = this.film[item.key];
+          this.film[item.key] = list.map((str) => {
+            return customLink(str, item.customURL);
           });
-          this.isLoading = false;
-        },
-        () => {
-          this.isLoading = false;
-          this.error = true;
-          // We can show error message to user as well by assigning to a variable.
-        }
-      )
+        });
+      })
     );
   }
 }

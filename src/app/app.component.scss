@@ -1,0 +1,7 @@
+.modal-wrapper {
+    padding-right: 15px; 
+    background: rgba(0, 0, 0, 0.5);
+    &.show {
+        display: block; 
+    }
+}

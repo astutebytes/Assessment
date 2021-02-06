@@ -4,13 +4,10 @@
 ></app-custom-header>
 
 <div class="container">
-  <p class="card-header text-center text-danger" *ngIf="!isLoading && error">
+  <p class="card-header text-center text-danger" *ngIf="error">
     Invalid specie id.
   </p>
-  <p class="card-header text-center text-info" *ngIf="isLoading">
-    Fetching detail...
-  </p>
-  <div class="card" *ngIf="!isLoading && !error && !!specie">
+  <div class="card" *ngIf="!error && !!specie">
     <div class="card-header">
       <b>{{ specie.name }}</b>
     </div>

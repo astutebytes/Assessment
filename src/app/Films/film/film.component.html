@@ -3,13 +3,7 @@
   urlText="&lt;&lt; Back to Films"
 ></app-custom-header>
 <div class="container">
-  <p class="card-header text-center text-danger" *ngIf="!isLoading && error">
-    Invalid film id.
-  </p>
-  <p class="card-header text-center text-info" *ngIf="isLoading">
-    Fetching detail...
-  </p>
-  <div class="card" *ngIf="!isLoading && !error && !!film">
+  <div class="card" *ngIf="!!film">
     <div class="card-header">
       <b>{{ film.title }}</b>
     </div>

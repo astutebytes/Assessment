@@ -13,8 +13,6 @@ import { customLink } from "src/app/Shared/common/utils";
 export class SpecieComponent extends BaseComponent implements OnInit {
   filmsUrl = `/${ROUTES.FILMS}`;
   specie: SpeciesModel;
-  isLoading = true;
-  error = false;
 
   UIMapping = [
     { label: "classification", key: "classification" },
@@ -43,12 +41,8 @@ export class SpecieComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptions.push(
       this.activatedRoute.params.subscribe((params: Params) => {
-        this.isLoading = true;
         if (params.id && params.id !== "0") {
           this.fetchSpecie(params.id);
-        } else {
-          this.isLoading = false;
-          this.error = true;
         }
       })
     );
@@ -56,24 +50,16 @@ export class SpecieComponent extends BaseComponent implements OnInit {
 
   fetchSpecie(id: string): void {
     this.subscriptions.push(
-      this.specieService.getSpecie(id).subscribe(
-        (resp: SpeciesModel) => {
-          this.specie = resp;
-          const customURLItems = this.UIMapping.filter((el) => el.customURL);
-          customURLItems.forEach((item) => {
-            const list: string[] = this.specie[item.key];
-            this.specie[item.key] = list.map((str) => {
-              return customLink(str, item.customURL);
-            });
+      this.specieService.getSpecie(id).subscribe((resp: SpeciesModel) => {
+        this.specie = resp;
+        const customURLItems = this.UIMapping.filter((el) => el.customURL);
+        customURLItems.forEach((item) => {
+          const list: string[] = this.specie[item.key];
+          this.specie[item.key] = list.map((str) => {
+            return customLink(str, item.customURL);
           });
-          this.isLoading = false;
-        },
-        () => {
-          this.isLoading = false;
-          this.error = true;
-          // We can show error message to user as well by assigning to a variable.
-        }
-      )
+        });
+      })
     );
   }
 }

@@ -13,8 +13,6 @@ import { customLink } from "src/app/Shared/common/utils";
 export class FilmsComponent extends BaseComponent implements OnInit {
   all_films: FilmModel[];
   films: FilmModel[];
-  isLoading = true;
-  error = false;
   columns = COLUMNS.FILMS;
   search: string = "";
 
@@ -24,18 +22,10 @@ export class FilmsComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.filmService.getFilms().subscribe(
-        (resp: FilmResponse) => {
-          this.all_films = resp.results;
-          this.films = resp.results;
-          this.isLoading = false;
-        },
-        () => {
-          this.isLoading = false;
-          this.error = true;
-          // We can show error message to user as well by assigning to a variable.
-        }
-      )
+      this.filmService.getFilms().subscribe((resp: FilmResponse) => {
+        this.all_films = resp.results;
+        this.films = resp.results;
+      })
     );
   }
 

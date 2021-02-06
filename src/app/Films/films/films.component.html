@@ -15,7 +15,6 @@
         type="text"
         class="form-control"
         placeholder="Search by title or description"
-        [disabled]="isLoading"
       />
     </div>
   </div>
@@ -41,17 +40,7 @@
           </button>
         </td>
       </tr>
-      <tr *ngIf="error">
-        <td [colSpan]="columns.length" class="text-center text-danger">
-          Unexpected error.
-        </td>
-      </tr>
-      <tr *ngIf="isLoading">
-        <td [colSpan]="columns.length" class="text-center text-info">
-          Fetching data...
-        </td>
-      </tr>
-      <tr *ngIf="!isLoading && !error && (!films || films.length === 0)">
+      <tr *ngIf="!films || films.length === 0">
         <td [colSpan]="columns.length" class="text-center">
           No records found.
         </td>
