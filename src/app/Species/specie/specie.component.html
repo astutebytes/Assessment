@@ -1,8 +1,8 @@
-<div class="jumbotron">
-  <div class="container">
-    <a [routerLink]="filmsUrl">&lt;&lt; Back to Films</a>
-  </div>
-</div>
+<app-custom-header
+  [url]="filmsUrl"
+  urlText="&lt;&lt; Back to Films"
+></app-custom-header>
+
 <div class="container">
   <p class="card-header text-center text-danger" *ngIf="!isLoading && error">
     Invalid specie id.

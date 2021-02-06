@@ -7,14 +7,12 @@ const routes: Routes = [
   {
     path: ROUTES.FILMS,
     loadChildren: () =>
-      import("./components/films/films.module").then((m) => m.FilmsModule),
+      import("./Films/films.module").then((m) => m.FilmsModule),
   },
   {
     path: ROUTES.SPECIES,
     loadChildren: () =>
-      import("./components/species/species.module").then(
-        (m) => m.SpeciesModule
-      ),
+      import("./Species/species.module").then((m) => m.SpeciesModule),
   },
   {
     path: "",

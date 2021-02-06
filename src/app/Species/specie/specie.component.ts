@@ -1,40 +1,41 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { AppService } from "src/app/app.service";
+import { AppService } from "src/app/Core/app.service";
 import { ROUTES } from "src/app/config/constants";
-import { FilmModel, FilmResponse } from "src/app/models/film.model";
-import { FilmService } from "../films.service";
+import { SpeciesModel } from "src/app/models/species.model";
+import { SpeciesService } from "../species.service";
 
 @Component({
-  selector: "app-film",
-  templateUrl: "film.component.html",
+  selector: "app-specie",
+  templateUrl: "specie.component.html",
 })
-export class FilmComponent implements OnInit, OnDestroy {
+export class SpecieComponent implements OnInit, OnDestroy {
   filmsUrl = `/${ROUTES.FILMS}`;
-  film: FilmModel;
+  specie: SpeciesModel;
   subscriptions: Array<Subscription> = [];
   isLoading = true;
   error = false;
 
   UIMapping = [
-    { label: "description", key: "opening_crawl" },
-    { label: "episode", key: "episode_id" },
-    { label: "director", key: "director" },
-    { label: "producer", key: "producer" },
-    { label: "Release Date", key: "release_date" },
-    { label: "species", key: "species", list: true, customURL: ROUTES.SPECIES },
-    { label: "starships", key: "starships", list: true },
-    { label: "vehicles", key: "vehicles", list: true },
-    { label: "characters", key: "characters", list: true },
-    { label: "planets", key: "planets", list: true },
+    { label: "classification", key: "classification" },
+    { label: "designation", key: "designation" },
+    { label: "Average Height", key: "average_height" },
+    { label: "Average Lifespan", key: "average_lifespan" },
+    { label: "Eye Colors", key: "eye_colors" },
+    { label: "Hair Colors", key: "hair_colors" },
+    { label: "Skin Colors", key: "skin_colors" },
+    { label: "language", key: "language" },
+    { label: "homeworld", key: "homeworld" },
+    { label: "people", key: "people", list: true },
+    { label: "films", key: "films", list: true, customURL: ROUTES.FILMS },
     { label: "url", key: "url" },
     { label: "created", key: "created" },
     { label: "edited", key: "edited" },
   ];
 
   constructor(
-    public filmService: FilmService,
+    public specieService: SpeciesService,
     public appService: AppService,
     public router: Router,
     public activatedRoute: ActivatedRoute
@@ -45,7 +46,7 @@ export class FilmComponent implements OnInit, OnDestroy {
       this.activatedRoute.params.subscribe((params: Params) => {
         this.isLoading = true;
         if (params.id && params.id !== "0") {
-          this.fetchFilm(params.id);
+          this.fetchSpecie(params.id);
         } else {
           this.isLoading = false;
           this.error = true;
@@ -54,15 +55,15 @@ export class FilmComponent implements OnInit, OnDestroy {
     );
   }
 
-  fetchFilm(filmId: string): void {
+  fetchSpecie(id: string): void {
     this.subscriptions.push(
-      this.filmService.getFilm(filmId).subscribe(
-        (resp: FilmModel) => {
-          this.film = resp;
+      this.specieService.getSpecie(id).subscribe(
+        (resp: SpeciesModel) => {
+          this.specie = resp;
           const customURLItems = this.UIMapping.filter((el) => el.customURL);
           customURLItems.forEach((item) => {
-            const list: string[] = this.film[item.key];
-            this.film[item.key] = list.map((str) => {
+            const list: string[] = this.specie[item.key];
+            this.specie[item.key] = list.map((str) => {
               return this.appService.customLink(str, item.customURL);
             });
           });

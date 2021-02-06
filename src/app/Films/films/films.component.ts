@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subscription } from "rxjs";
-import { AppService } from "src/app/app.service";
+import { AppService } from "src/app/Core/app.service";
 import { ROUTES } from "src/app/config/constants";
 import { FilmModel, FilmResponse } from "src/app/models/film.model";
 import { FilmService } from "../films.service";

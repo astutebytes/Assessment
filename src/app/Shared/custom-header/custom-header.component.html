@@ -1,0 +1,7 @@
+<div class="jumbotron">
+  <div class="container">
+    <a *ngIf="!!url && !!urlText" [routerLink]="url">{{ urlText }}</a>
+    <h1 *ngIf="!!title">Star Wars API</h1>
+    <p *ngIf="!!subtitle">Utilization of Star Wars API</p>
+  </div>
+</div>

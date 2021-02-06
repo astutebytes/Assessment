@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { API_REGEX } from "./config/constants";
+import { API_REGEX } from "../config/constants";
 
 @Injectable()
 export class AppService {
