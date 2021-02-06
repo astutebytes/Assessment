@@ -7,16 +7,16 @@ import { URL } from "src/app/config/constants";
 
 @Injectable()
 export class FilmService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getFilms(): Observable<FilmResponse> {
-    return this.httpClient
+    return this.http
       .get(URL.BASE + URL.FILMS)
       .pipe(map((res: FilmResponse) => res));
   }
 
   getFilm(id: string): Observable<FilmModel> {
-    return this.httpClient
+    return this.http
       .get(URL.BASE + URL.FILMS + id)
       .pipe(map((res: FilmModel) => res));
   }

@@ -1,19 +1,18 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { Subscription } from "rxjs";
-import { AppService } from "src/app/Core/app.service";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params } from "@angular/router";
 import { ROUTES } from "src/app/config/constants";
 import { SpeciesModel } from "src/app/models/species.model";
 import { SpeciesService } from "../species.service";
+import { BaseComponent } from "src/app/Shared/common/base.component";
+import { customLink } from "src/app/Shared/common/utils";
 
 @Component({
   selector: "app-specie",
   templateUrl: "specie.component.html",
 })
-export class SpecieComponent implements OnInit, OnDestroy {
+export class SpecieComponent extends BaseComponent implements OnInit {
   filmsUrl = `/${ROUTES.FILMS}`;
   specie: SpeciesModel;
-  subscriptions: Array<Subscription> = [];
   isLoading = true;
   error = false;
 
@@ -36,9 +35,10 @@ export class SpecieComponent implements OnInit, OnDestroy {
 
   constructor(
     private specieService: SpeciesService,
-    private appService: AppService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -63,23 +63,17 @@ export class SpecieComponent implements OnInit, OnDestroy {
           customURLItems.forEach((item) => {
             const list: string[] = this.specie[item.key];
             this.specie[item.key] = list.map((str) => {
-              return this.appService.customLink(str, item.customURL);
+              return customLink(str, item.customURL);
             });
           });
           this.isLoading = false;
         },
-        (error) => {
+        () => {
           this.isLoading = false;
           this.error = true;
           // We can show error message to user as well by assigning to a variable.
         }
       )
     );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription: Subscription) => {
-      subscription.unsubscribe();
-    });
   }
 }

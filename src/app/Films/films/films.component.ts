@@ -1,29 +1,26 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Subscription } from "rxjs";
-import { AppService } from "src/app/Core/app.service";
-import { ROUTES } from "src/app/config/constants";
+import { COLUMNS, ROUTES } from "src/app/config/constants";
 import { FilmModel, FilmResponse } from "src/app/models/film.model";
 import { FilmService } from "../films.service";
+import { BaseComponent } from "src/app/Shared/common/base.component";
+import { customLink } from "src/app/Shared/common/utils";
 
 @Component({
   selector: "app-films",
   templateUrl: "./films.component.html",
 })
-export class FilmsComponent implements OnInit, OnDestroy {
+export class FilmsComponent extends BaseComponent implements OnInit {
   all_films: FilmModel[];
   films: FilmModel[];
-  subscriptions: Array<Subscription> = [];
   isLoading = true;
   error = false;
-  columns = ["Sr. No.", "Title", "Episode", "Director", "Release Date", ""];
+  columns = COLUMNS.FILMS;
   search: string = "";
 
-  constructor(
-    private filmService: FilmService,
-    private router: Router,
-    private appService: AppService
-  ) {}
+  constructor(private filmService: FilmService, private router: Router) {
+    super();
+  }
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -33,7 +30,7 @@ export class FilmsComponent implements OnInit, OnDestroy {
           this.films = resp.results;
           this.isLoading = false;
         },
-        (error) => {
+        () => {
           this.isLoading = false;
           this.error = true;
           // We can show error message to user as well by assigning to a variable.
@@ -58,14 +55,8 @@ export class FilmsComponent implements OnInit, OnDestroy {
   }
 
   onRowSelect(url: string): void {
-    const redirectUrl = this.appService.customLink(url, ROUTES.FILMS);
+    const redirectUrl = customLink(url, ROUTES.FILMS);
 
     this.router.navigateByUrl(redirectUrl);
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription: Subscription) => {
-      subscription.unsubscribe();
-    });
   }
 }

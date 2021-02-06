@@ -7,14 +7,14 @@ import { SpeciesModel } from "src/app/models/species.model";
 
 @Injectable()
 export class SpeciesService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   /**
    * Fetch specie detail
    * @param id specie id
    */
   getSpecie(id: string): Observable<SpeciesModel> {
-    return this.httpClient
+    return this.http
       .get(URL.BASE + URL.SPECIES + id)
       .pipe(map((res: SpeciesModel) => res));
   }

@@ -11,4 +11,8 @@ export const ROUTES = {
   SPECIES: "species",
 };
 
+export const COLUMNS = {
+  FILMS: ["Sr. No.", "Title", "Episode", "Director", "Release Date", "Action"],
+};
+
 export const API_REGEX = environment.API_REGEX;

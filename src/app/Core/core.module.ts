@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
-import { AppService } from "./app.service";
 
+// We have not removed this file for future reference and keeping the code structure.
 @NgModule({
-  providers: [AppService],
+  providers: [],
 })
 export class CoreModule {}

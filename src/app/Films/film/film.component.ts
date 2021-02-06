@@ -1,19 +1,18 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { Subscription } from "rxjs";
-import { AppService } from "src/app/Core/app.service";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params } from "@angular/router";
 import { ROUTES } from "src/app/config/constants";
 import { FilmModel } from "src/app/models/film.model";
 import { FilmService } from "../films.service";
+import { BaseComponent } from "src/app/Shared/common/base.component";
+import { customLink } from "src/app/Shared/common/utils";
 
 @Component({
   selector: "app-film",
   templateUrl: "film.component.html",
 })
-export class FilmComponent implements OnInit, OnDestroy {
+export class FilmComponent extends BaseComponent implements OnInit {
   filmsUrl = `/${ROUTES.FILMS}`;
   film: FilmModel;
-  subscriptions: Array<Subscription> = [];
   isLoading = true;
   error = false;
 
@@ -35,9 +34,10 @@ export class FilmComponent implements OnInit, OnDestroy {
 
   constructor(
     private filmService: FilmService,
-    private appService: AppService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.subscriptions.push(
@@ -62,23 +62,17 @@ export class FilmComponent implements OnInit, OnDestroy {
           customURLItems.forEach((item) => {
             const list: string[] = this.film[item.key];
             this.film[item.key] = list.map((str) => {
-              return this.appService.customLink(str, item.customURL);
+              return customLink(str, item.customURL);
             });
           });
           this.isLoading = false;
         },
-        (error) => {
+        () => {
           this.isLoading = false;
           this.error = true;
           // We can show error message to user as well by assigning to a variable.
         }
       )
     );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((subscription: Subscription) => {
-      subscription.unsubscribe();
-    });
   }
 }
