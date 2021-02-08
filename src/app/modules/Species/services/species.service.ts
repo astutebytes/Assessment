@@ -1,11 +1,13 @@
 import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { HttpClient } from "@angular/common/http";
-import { URL } from "src/app/config/constants";
-import { SpeciesModel } from "src/app/models/species.model";
 
-@Injectable()
+import { SpeciesModel } from "src/app/modules/Species/_models/species.model";
+
+import { _base_URL, _species_route } from "src/app/Core/_data/route";
+
+@Injectable({ providedIn: "root" })
 export class SpeciesService {
   constructor(private http: HttpClient) {}
 
@@ -15,7 +17,7 @@ export class SpeciesService {
    */
   getSpecie(id: string): Observable<SpeciesModel> {
     return this.http
-      .get(URL.BASE + URL.SPECIES + id)
+      .get(_base_URL + _species_route + "/" + id)
       .pipe(map((res: SpeciesModel) => res));
   }
 }

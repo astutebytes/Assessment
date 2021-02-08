@@ -1,4 +1,4 @@
-import { FilmModel } from "./film.model";
+import { FilmModel } from "../../Films/_models/film.model";
 
 export class SpeciesModel {
   name: string; // The name of this species.

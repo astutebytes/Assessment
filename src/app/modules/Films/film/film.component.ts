@@ -1,17 +1,18 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params } from "@angular/router";
-import { ROUTES } from "src/app/config/constants";
-import { FilmModel } from "src/app/models/film.model";
-import { FilmService } from "../films.service";
-import { BaseComponent } from "src/app/Shared/common/base.component";
-import { customLink } from "src/app/Shared/common/utils";
+import { FilmModel } from "src/app/modules/Films/_models/film.model";
+import { FilmService } from "../services/films.service";
+import { BaseComponent } from "src/app/Shared/components/base.component";
+import { customLink } from "src/app/Core/utils/utils";
+
+import { _films_route, _species_route } from "src/app/Core/_data/route";
 
 @Component({
   selector: "app-film",
   templateUrl: "film.component.html",
 })
 export class FilmComponent extends BaseComponent implements OnInit {
-  filmsUrl = `/${ROUTES.FILMS}`;
+  filmsUrl = `/${_films_route}`;
   film: FilmModel;
 
   UIMapping = [
@@ -20,7 +21,7 @@ export class FilmComponent extends BaseComponent implements OnInit {
     { label: "director", key: "director" },
     { label: "producer", key: "producer" },
     { label: "Release Date", key: "release_date" },
-    { label: "species", key: "species", list: true, customURL: ROUTES.SPECIES },
+    { label: "species", key: "species", list: true, customURL: _species_route },
     { label: "starships", key: "starships", list: true },
     { label: "vehicles", key: "vehicles", list: true },
     { label: "characters", key: "characters", list: true },

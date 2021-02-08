@@ -1,4 +1,4 @@
-import { API_REGEX } from "src/app/config/constants";
+import { API_REGEX } from "src/app/Core/app-constants";
 
 export const customLink = (url: string, token: string): string => {
   const regex = new RegExp(API_REGEX.replace("$token", token));

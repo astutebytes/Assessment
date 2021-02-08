@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { NgxSpinnerService } from "ngx-spinner";
-import { LoadingService } from "./Core/loading.service";
+import { LoadingService } from "./Core/services/loader/loading.service";
 import { delay } from "rxjs/operators";
 
 @Component({

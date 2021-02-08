@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { HttpRequestInterceptor } from "./http-request-interceptor";
-import { LoadingService } from "./loading.service";
+import { HttpRequestInterceptor } from "./services/interceptors/http-request-interceptor";
+import { LoadingService } from "./services/loader/loading.service";
 
 @NgModule({
   providers: [

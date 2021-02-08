@@ -1,17 +1,18 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params } from "@angular/router";
-import { ROUTES } from "src/app/config/constants";
-import { SpeciesModel } from "src/app/models/species.model";
-import { SpeciesService } from "../species.service";
-import { BaseComponent } from "src/app/Shared/common/base.component";
-import { customLink } from "src/app/Shared/common/utils";
+import { SpeciesModel } from "src/app/modules/Species/_models/species.model";
+import { SpeciesService } from "../services/species.service";
+import { BaseComponent } from "src/app/Shared/components/base.component";
+import { customLink } from "src/app/Core/utils/utils";
+
+import { _films_route } from "src/app/Core/_data/route";
 
 @Component({
   selector: "app-specie",
   templateUrl: "specie.component.html",
 })
 export class SpecieComponent extends BaseComponent implements OnInit {
-  filmsUrl = `/${ROUTES.FILMS}`;
+  filmsUrl = `/${_films_route}`;
   specie: SpeciesModel;
 
   UIMapping = [
@@ -25,7 +26,7 @@ export class SpecieComponent extends BaseComponent implements OnInit {
     { label: "language", key: "language" },
     { label: "homeworld", key: "homeworld" },
     { label: "people", key: "people", list: true },
-    { label: "films", key: "films", list: true, customURL: ROUTES.FILMS },
+    { label: "films", key: "films", list: true, customURL: _films_route },
     { label: "url", key: "url" },
     { label: "created", key: "created" },
     { label: "edited", key: "edited" },
